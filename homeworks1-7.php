@@ -168,6 +168,7 @@ if (($hours % 10 == 1) && ($hours % 100 != 11)) {
 };
 */
 
+/*
 function numbersDecline($number, $suf1, $suf2, $suf5) {
 	if (($number % 10 == 1) && ($number % 100 != 11)) {
 		return $suf1;
@@ -177,6 +178,21 @@ function numbersDecline($number, $suf1, $suf2, $suf5) {
 		return $suf5;
 	};
 };
+*/
 
+if ($time > 20) {
+	$time %= 10;
+}
+
+function numbersDecline($number, $suf1, $suf2, $suf5) {
+	if ($number == 1) {
+		$string = $suf1;
+} else if ($number > 1 && $number < 5) {
+		$string = $suf2;
+	} else {
+		$string = $suf5;
+	};
+	return $string;
+};
 echo 'Текущее время: ', $hours, numbersDecline($hours, 'час ', 'часа ', 'часов '), $minutes, numbersDecline($minutes, 'минута', 'минуты', 'минут');
 	
