@@ -8,6 +8,7 @@ echo "Выбраны 2 рандомных числа в диапазоне: [-99
 если \$а и \$b разных знаков, вывести их сумму;<br>
 Результат: ";
 
+/*
 if ($a >= 0 && $b >= 0) {
 	echo $a - $b;
 } else if ($a < 0 && $b < 0) {
@@ -15,7 +16,15 @@ if ($a >= 0 && $b >= 0) {
 } else {
 	echo $a + $b;
 };
-
+*/
+//Оптимизированный вариант:
+if ($a >= 0 XOR $b >= 0) {
+	echo $a + $b;
+} else if ($a < 0) {
+	echo $a * $b;
+} else {
+	echo $a - $b;
+};
 
 echo '<hr>Домашнее задание №2. Оператор switch.<br><br>';
 $a = random_int(0, 15);;
@@ -140,17 +149,14 @@ function power($val, $pow){
 
 
 echo '<hr>Домашнее задание №7. Склонение текущих часов и минут при помощи функций.<br><br>';
-
+/*
 $hours = date("H ");
-$minutes = date("i ");
-
-$h1 = 'час ';
-$h2 = 'часа ';
-$h5 = 'часов ';
-
-$m1 = 'минута';
-$m2 = 'минуты';
-$m5 = 'минут';
+$minutes = date("i ")
+*/;
+//Оптимизированный вариант:
+$time = time();
+$hours = date("H ", $time);
+$minutes = date("i ", $time);
 
 /*
 if (($hours % 10 == 1) && ($hours % 100 != 11)) {
@@ -161,44 +167,16 @@ if (($hours % 10 == 1) && ($hours % 100 != 11)) {
 	echo 'Текущее время: ', $hours, $h1, $minutes, $m1;
 };
 */
-//Склонение чисел, код можно сократить если поменять 2 и 3 ветвления местами и изменисть условия.
-function numbersDecline($number) {
+
+function numbersDecline($number, $suf1, $suf2, $suf5) {
 	if (($number % 10 == 1) && ($number % 100 != 11)) {
-		return 'number1';
+		return $suf1;
 } else if ((($number % 10) < 5) && $number != 11 && $number != 12 && $number != 13 && $number != 14 && ($number % 10) != 0) {
-		return 'number2';
+		return $suf2;
 	} else {
-		return 'number5';
+		return $suf5;
 	};
 };
 
-function hours($hours, $h1, $h2, $h5) {
-	switch (numbersDecline($hours)) {
-	case 'number1':
-		return $h1;
-		break;
-	case 'number2':
-		return $h2;
-		break;
-	case 'number5':
-		return $h5;
-		break;
-	};
-};
-
-function minutes($minutes, $m1, $m2, $m5) {
-	switch (numbersDecline($minutes)) {
-	case 'number1':
-		return $m1;
-		break;
-	case 'number2':
-		return $m2;
-		break;
-	case 'number5':
-		return $m5;
-		break;
-	};
-};
-
-echo 'Текущее время: ', $hours, hours($hours, $h1, $h2, $h5), $minutes, minutes($minutes, $m1, $m2, $m5);
+echo 'Текущее время: ', $hours, numbersDecline($hours, 'час ', 'часа ', 'часов '), $minutes, numbersDecline($minutes, 'минута', 'минуты', 'минут');
 	
