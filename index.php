@@ -187,7 +187,7 @@ echo '<br><br><hr>6. В имеющемся шаблоне сайта замен�
 
 $menu = [
 	'Главная',
-	'Новости',
+	'Новости' =>   //,
 	[
 		'Новости спорта',
 		'Новости о политике',
@@ -200,6 +200,7 @@ $menu = [
 $html = file_get_contents('index.html');
 echo str_replace('<div id="returnMenu"></div>', menuGeneration($menu), $html);
 
+/*
 function menuGeneration ($menu){
 	$returnMenu = '<nav>';
 	foreach($menu as $key => $value){
@@ -215,6 +216,24 @@ function menuGeneration ($menu){
 			}
 			$returnMenu .= '</div></div>';
 		}
+	}
+	$returnMenu .= '</nav>';
+	return $returnMenu;
+}
+*/
+
+function menuGeneration($menu) {
+	$returnMenu = '<nav>';
+	foreach ($menu as $key => $value) {
+		if (is_array($value)) {
+			$returnMenu .= "<div><a><span>{$key}</span></a><div>";
+			foreach ($value as $sub => $val) {
+				$returnMenu .= "<a>{$val}</a>";
+			}
+			$returnMenu .= "</div></div>";
+				continue;
+		}
+		$returnMenu .= "<div><a><span>{$value}</span></a></div>";
 	}
 	$returnMenu .= '</nav>';
 	return $returnMenu;
@@ -266,7 +285,7 @@ for ($i = 1;$i < 10;$i++){
 	echo '<tr>';
 	for ($j = 1;$j < 10;$j++){
 		echo '<td>';
-			echo $i * $j;
+		echo $i * $j;
 		echo '</td>';
 	}
 	echo '</tr>';
