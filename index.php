@@ -113,7 +113,8 @@ echo '<br><hr>4. Объявить массив, индексами которо�
 (‘а’=> ’a’, ‘б’ => ‘b’, ‘в’ => ‘v’, ‘г’ => ‘g’, …, ‘э’ => ‘e’, ‘ю’ => ‘yu’, ‘я’ => ‘ya’).<br>
 Написать функцию транслитерации строк.<br><br>Решение: <br><br>';
 
-$translit = [
+function transliter($word){
+	$translit = [
 	'а' => 'a',		
 	'б' => 'b',
 	'в' => 'v',
@@ -152,19 +153,21 @@ $translit = [
 	'!' => '!',
 	'?' => '?',
 	':' => ':',
+	'\'' => '\'',
+	'"' => '"',
 ];
 
-function transliter($word, $translit){
 	$word = mb_strtolower($word);
-	for ($i = 0;$i < strlen($word);$i++){;
-			$s = mb_substr($word, $i, 1);
-		foreach ($translit as $key => $value){
-			if ($key == $s){
-				$s = $value;
-				echo $s;
-			}
+	$words = '';
+	for ($i = 0;$i < mb_strlen($word);$i++){;
+		$s = mb_substr($word, $i, 1);
+		if ($translit[$s]){
+			$words .= $translit[$s];
+		} else {
+			$words .= $s;
 		}
 	}
+	return $words;
 }
 
 echo transliter('какая замечательная погода', $translit) . '<br><br>';
@@ -260,18 +263,60 @@ echo '<br><br><hr>9. *Объединить две ранее написанны�
 
 
 function transliters($word, $translit){
+	$translit = [
+	'а' => 'a',		
+	'б' => 'b',
+	'в' => 'v',
+	'г' => 'g',
+	'д' => 'd',
+	'е' => 'e',
+	'ё' => 'yo',
+	'ж' => 'zh',
+	'з' => 'z',
+	'и' => 'i',
+	'й' => 'j',
+	'к' => 'k',
+	'л' => 'l',
+	'м' => 'm',
+	'н' => 'n',
+	'о' => 'o',
+	'п' => 'p',
+	'р' => 'r',
+	'с' => 's',
+	'т' => 't',
+	'у' => 'u',
+	'ф' => 'f',
+	'х' => 'h',
+	'ц' => 'c',
+	'ч' => 'ch',
+	'ш' => 'sh',
+	'щ' => 'sch',
+	'ь' => '\'',
+	'ы' => 'y',
+	'ъ' => '`',
+	'э' => '"',
+	'ю' => 'ju',
+	'я' => 'ja',
+	' ' => '_', //_
+	'.' => '.',
+	'!' => '!',
+	'?' => '?',
+	':' => ':',
+	'\'' => '\'',
+	'"' => '"',
+];
+
 	$word = mb_strtolower($word);
 	$words = '';
-	for ($i = 0;$i < strlen($word);$i++){;
-			$s = mb_substr($word, $i, 1);
-		foreach ($translit as $key => $value){
-			if ($key == $s){
-				$s = $value;
-				$words .= $s;
-			}
+	for ($i = 0;$i < mb_strlen($word);$i++){;
+		$s = mb_substr($word, $i, 1);
+		if ($translit[$s]){
+			$words .= $translit[$s];
+		} else {
+			$words .= $s;
 		}
 	}
-	return str_replace(' ', '_', $words);
+	return $words;
 }
 
 echo transliters('какая замечательная погода', $translit) . '<br><br>';
