@@ -152,8 +152,6 @@ $translit = [
 	'!' => '!',
 	'?' => '?',
 	':' => ':',
-	'"' => '"',
-	'\'' => '\'',
 ];
 
 function transliter($word, $translit){
