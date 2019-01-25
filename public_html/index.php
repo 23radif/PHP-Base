@@ -33,10 +33,7 @@ fwrite($file,date('H:i:s d-m-Y') . PHP_EOL);
 if (file_exists($fileLog)) {
 	$file_arr = file($fileLog);
 	if (count($file_arr) >= 10) {
-		$i = 1;
-		while (file_exists("log{$i}.txt")) {
-			$i++;
-		} 
+		for ($i = 1;file_exists("log{$i}.txt");$i++) {}
 		fopen("log{$i}.txt", 'a');
 		copy($fileLog, "log{$i}.txt");
 		file_put_contents($fileLog, '');
