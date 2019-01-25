@@ -16,12 +16,32 @@ for ($i = 0;$i < count($images);$i++) {
 	echo "<a href=img/{$images[$i]['src']} target={$images[$i]['target']}><img src=img/{$images[$i]['src']} 
 	alt={$images[$i]['alt']} width={$images[$i]['width']}></img></a>";
 }
-$dir = './img';
-$imagesSccandir = scandir($dir);
+$dirImg = __DIR__ . '/img';
+$imagesSccandir = scandir($dirImg);
 for ($i = 0;$i < count($imagesSccandir);$i++) {
 	if ($i > 1) {
 		echo "<a href=img/{$imagesSccandir[$i]} target='_blank'><img src=img/{$imagesSccandir[$i]} 
 		alt={$imagesSccandir[$i]} width=200px></img></a>";
 	}
 }
+
+$fileLog = 'log.txt';
+$file = fopen($fileLog, 'a');
+fwrite($file,date('H:i:s d-m-Y') . PHP_EOL);
+//$str = file_get_contents($fileLog);
+
+if (file_exists($fileLog)) {
+	$file_arr = file($fileLog);
+	if (count($file_arr) >= 10) {
+		$i = 1;
+		while (file_exists("log{$i}.txt")) {
+			$i++;
+		} 
+		fopen("log{$i}.txt", 'a');
+		copy($fileLog, "log{$i}.txt");
+		file_put_contents($fileLog, '');
+	}
+}
+
+fclose($file);
 ?>
