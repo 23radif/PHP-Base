@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     header('Location: '. $_SERVER['REQUEST_URI']);
     exit;
 }
-var_dump($_FILES);
+
 $title = 'Добавление пользователя';
 $content = <<<php
 <p>
