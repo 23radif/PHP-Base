@@ -1,6 +1,7 @@
 <?php
 $link = connect();
 $dirImg = './img/';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$name = clearStr($_POST["name"]);
@@ -8,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$id_images = (int)clearStr($_POST["id_images"]);
 	$remove = clearStr($_POST["remove"]);
 	$removeRev = clearStr($_POST["removeRev"]);
+	$AddToCart = clearStr($_POST["AddToCart"]);
 	
 	if ($remove == 'Удалить') {
 		$sql = "DELETE FROM reviews WHERE reviews.num = {$removeRev}";
@@ -20,18 +22,50 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			mysqli_query($link, $sql);
 	}
 	
+	if (!empty($AddToCart)) {
+		$id_images = (int)clearStr($_POST["id_images"]);
+		$_SESSION['cart'][] = $id_images;
+	}
+	
 	header('Location: '. $_SERVER['REQUEST_URI']);
     exit;
 }
 
+var_dump($_SESSION['cart']);
+//foreach ($_SESSION['cart'] as $key => $value) {
+//	$id_images = $value;
+//}
+
 $sql = "SELECT id, url, size, name FROM images ORDER BY CountClick DESC ;";
+$res = mysqli_query($link, $sql);
+$content = <<<php
+	<h2>Корзина товаров:</h2>
+php;
+while ($row = mysqli_fetch_assoc($res)) {
+	foreach ($_SESSION['cart'] as $key => $value) {
+		if ($row['id'] == $value) {
+			$content .= <<<php
+			<a style="" href="?page=8&url={$row['url']}&dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
+				<img src={$dirImg}{$row['url']} 
+					alt={$row['name']} width=100px></img></a>
+php;
+		}
+	}
+}
+
+$content .= '<br><br><h2>Товары:</h2>';
 $res = mysqli_query($link, $sql);
 while ($row = mysqli_fetch_assoc($res)) {
 	$content .= <<<php
 	<div style="float:left; margin: 2px; width: 200px; border:1px solid gray; padding:3px">
+		Название товара: <span style="color:green;font-weight:600">{$row['name']}</span><br>
 		<a style="float:left" href="?page=8&url={$row['url']}&dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
 		<img src={$dirImg}{$row['url']} 
 			alt={$row['name']} width=200px></img></a>
+		<form action="" method="post">
+				<input type="hidden" name="id_images" value="{$row['id']}">
+				<input type="submit" name="AddToCart" value="Добавить в корзину">
+		</form>
 		<figcaption>Размер изображения: <br>{$row['size']}<br><br>
 			Добавить отзыв:
 			<form action="" method="post">

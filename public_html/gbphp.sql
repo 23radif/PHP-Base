@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Фев 05 2019 г., 11:15
+-- Время создания: Фев 05 2019 г., 15:41
 -- Версия сервера: 8.0.12
 -- Версия PHP: 7.2.10
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- База данных: `gbphp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL,
+  `id_users` int(11) DEFAULT NULL,
+  `id_product` int(11) NOT NULL,
+  `quanity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -94,7 +107,8 @@ INSERT INTO `reviews` (`num`, `id_images`, `name`, `review`) VALUES
 (75, 0, '', ''),
 (76, 0, '', ''),
 (78, 0, '', ''),
-(79, 1, 'safaas', 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftttttttttt');
+(79, 1, 'safaas', 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftttttttttt'),
+(80, 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -125,6 +139,12 @@ INSERT INTO `users` (`id`, `name`, `login`, `password`, `role`, `dob`) VALUES
 --
 
 --
+-- Индексы таблицы `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `images`
 --
 ALTER TABLE `images`
@@ -147,6 +167,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
@@ -156,7 +182,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT COMMENT 'номер отзыва', AUTO_INCREMENT=80;
+  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT COMMENT 'номер отзыва', AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
