@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Фев 04 2019 г., 14:48
+-- Время создания: Фев 05 2019 г., 11:15
 -- Версия сервера: 8.0.12
 -- Версия PHP: 7.2.10
 
@@ -83,7 +83,6 @@ INSERT INTO `reviews` (`num`, `id_images`, `name`, `review`) VALUES
 (45, 3, '32523', '5235235'),
 (49, 1, 'ФВфв', 'ФВФВ'),
 (63, 1, 'sdshsdhdshsdh', 'sdhsdhsdhsdddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
-(66, 1, 'adDd', 'dadFASF'),
 (67, 1, '1421414', '124124142'),
 (68, 1, 'ASDASFAFASF', 'SAFASFASFAFAFSAFAF'),
 (69, 0, '', ''),
@@ -92,7 +91,10 @@ INSERT INTO `reviews` (`num`, `id_images`, `name`, `review`) VALUES
 (72, 0, '', ''),
 (73, 0, '', ''),
 (74, 0, '', ''),
-(75, 0, '', '');
+(75, 0, '', ''),
+(76, 0, '', ''),
+(78, 0, '', ''),
+(79, 1, 'safaas', 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftttttttttt');
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `login`, `password`, `role`, `dob`) VALUES
-(1, 'Вася', 'vas', 'vas', 1, '2000-01-25'),
+(1, 'Вася', 'admin', '21db9c15a75962a0865d5a39fe7fb9ff', 1, '2000-01-25'),
 (2, 'Света', 'svet', 'svet', 0, NULL),
 (35, 'Саня', 'sah', '123', 0, '2004-02-04');
 
@@ -154,13 +156,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT COMMENT 'номер отзыва', AUTO_INCREMENT=76;
+  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT COMMENT 'номер отзыва', AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
