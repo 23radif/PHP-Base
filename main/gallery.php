@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$removeRev = clearStr($_POST["removeRev"]);
 	$AddToCart = clearStr($_POST["AddToCart"]);
 	$buy = clearStr($_POST["buy"]);
+	$delProduct = clearStr($_POST["delProduct"]);
+	$addProduct = clearStr($_POST["addProduct"]);
+	$login = $_SESSION['login'];
+	$_SESSION['msgGalleryErr'] = '';
 	
 	if ($remove == 'Удалить') {
 		$sql = "DELETE FROM reviews WHERE reviews.num = {$removeRev}";
@@ -23,16 +27,43 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	}
 	
 	if (!empty($AddToCart)) {
-		$id_images = (int)clearStr($_POST["id_images"]);
-		$_SESSION['cart'][] = $id_images;
+		if (empty($_SESSION['cart'][$id_images])) {
+			$_SESSION['cart'][$id_images]['count'] = 1;
+		} else {
+			$_SESSION['cart'][$id_images]['count']++;
+		}
+	}
+	
+	if (!empty($delProduct)) {
+		$_SESSION['cart'][$id_images]['count']--;
+		if ($_SESSION['cart'][$id_images]['count'] <= 0) {
+			unset($_SESSION['cart'][$id_images]);
+		}
 	}
 	
 	if (!empty($buy)) {
-		foreach ($_SESSION['cart'] as $key => $value) {
-			$sql = "INSERT INTO customers(id_product) 
-			VALUES ($value)";
-			mysqli_query($link, $sql);
+		if (!empty($login )) {
+			$sql = "SELECT id, name, login, password, role, dob 
+					FROM users 
+					WHERE login = '$login'";
+			$res = mysqli_query(connect(), $sql);
+			$row = mysqli_fetch_assoc($res);
+			$loginId = $row['id'];
+		} else {
+			$_SESSION['msgGalleryErr'] = 'Необходимо авторизоваться либо зарегистрироваться!';
+			$_SESSION['msgGallery'] = '';
+			header('Location: '. $_SERVER['REQUEST_URI']);
+			exit;
 		}
+		foreach ($_SESSION['cart'] as $key => $value) {
+			foreach ($_SESSION['cart'][$key] as $key2 => $value2) {
+				$sql = "INSERT INTO customers(id_users, id_product, quantity) 
+				VALUES ($loginId, $key, $value2)";
+				mysqli_query($link, $sql);
+			}
+		}
+		$_SESSION['msgGallery'] = '';
+		unset($_SESSION['cart']);
 	}
 	
 	header('Location: '. $_SERVER['REQUEST_URI']);
@@ -45,11 +76,19 @@ $content = '<h2>Корзина товаров:</h2>';
 if (!empty($_SESSION['cart'])) {
 	while ($row = mysqli_fetch_assoc($res)) {
 	foreach ($_SESSION['cart'] as $key => $value) {
-		if ($row['id'] == $value) {
+		if ($row['id'] == $key) {
 			$content .= <<<php
-			<a style="" &dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
+				<div style="display:inline-block;margin: 2px; border:1px solid gray; padding:3px">
 				<img src={$dirImg}{$row['url']} 
-					alt={$row['name']} width=100px></img></a>
+					alt={$row['name']} width=100px>
+				</img><br>
+				Количество: {$_SESSION['cart'][$key]['count']}
+				<form action="" method="post">
+					<input type="hidden" name="id_images" value="{$key}">
+					<input type="submit" name="delProduct" value="Удалить">
+					<input type="submit" name="addProduct" value="Добавить">
+				</form>
+				</div>
 php;
 		}
 	}
@@ -57,8 +96,10 @@ php;
 
 $content .= <<<php
 	<form action="" method="post">
-		<input type="submit" name="buy" value="Купить">
+		<input type="submit" name="buy" value="Купить выбранные товары">
 	</form>
+	<span style='color:green'>{$_SESSION['msgGallery']}</span>
+	<span style='color:red'>{$_SESSION['msgGalleryErr']}</span>
 php;
 }
 

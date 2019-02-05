@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	mysqli_query(connect(), $sql);
 	$_SESSION['msg_auth'] = '';
 	$_SESSION['login'] = $login;
+	$_SESSION['msgGallery'] = 'Вы авторизованный пользователь. Можете покупать товары';
+	$_SESSION['msgGalleryErr'] = '';
 	
 	header('Location: /main/?page=10');
 	exit;

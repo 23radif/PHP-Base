@@ -19,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$passwordSql = $row['password'];
 	if ($password == $passwordSql){
 		$_SESSION['isAdmin'] = 'YES';
-		header('Location: /main/?page=10');
 		$_SESSION['msg'] = 'Успешная авторизация! Нажмите Exit (в левом, верхнем углу) для выхода';
 		$_SESSION['login'] = $row['login'];
+		$_SESSION['msgGallery'] = 'Вы авторизованный пользователь. Можете покупать товары';
+		$_SESSION['msgGalleryErr'] = '';
+		header('Location: /main/?page=10');
 		exit;
 	}
 	$_SESSION['msg'] = 'Неверные логин или пароль';
