@@ -45,7 +45,7 @@ switch ($page){
         <li><a href="?page=1">Главная</a></li>
         <li><a href="?page=3">Пользователи</a></li>
         <li><a href="?page=5">Файлы</a></li>
-		<li><a href="?page=6">Калькуляторы</a></li>
+		<li><a href="?page=6">Калькулятор</a></li>
 		<li><a href="?page=7">Галерея/товары/отзывы</a></li>
     </ul>
     <h1><?= $title?></h1>

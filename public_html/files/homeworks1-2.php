@@ -26,31 +26,26 @@ function mathOperation($var1, $var2, $select) {
 		}
 	return $result;
 }
-$title = "Калькуляторы:";
+$title = "Калькулятор:";
 
 $content = <<<php
 <form action="" method="post">
-	<input type="text" name="var1" placeholder="1 переменная">
-	<input type="text" name="var2" placeholder="2 переменная">
-	<select name ="select" id ="">
+	<input type="text" name="var1" placeholder="1 переменная" style='width:89px; margin:1px'>
+	<input type="text" name="var2" placeholder="2 переменная" style='width:89px; margin:1px'><br>
+	<select name ="select" id ="" style='width:91px; margin:2px'>
 		<option value="sum">Сложение</option>
 		<option value="sub">Вычитание</option>
 		<option value="mult">Умножение</option>
 		<option value="div">Деление</option>
 	</select>
-	<input type="submit" value="Вычислить">
-</form>
-
-<form action="" method="post">
-	<input type="text" name="var1" placeholder="1 переменная">
-	<input type="text" name="var2" placeholder="2 переменная">
-
+	<input type="submit" value="Вычислить" style='margin:1px'><br>
+	
 	<input type="submit" name="select" value="sum">
 	<input type="submit" name="select" value="sub">
 	<input type="submit" name="select" value="mult">
 	<input type="submit" name="select" value="div">
-	<p>Результат: <?=$result?></p>
 </form>
+<p>Результат: {$result}</p>
 php;
 
 ?>
