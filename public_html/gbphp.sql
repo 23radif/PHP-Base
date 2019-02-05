@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Фев 05 2019 г., 15:41
+-- Время создания: Фев 05 2019 г., 22:58
 -- Версия сервера: 8.0.12
 -- Версия PHP: 7.2.10
 
@@ -32,7 +32,7 @@ CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `id_users` int(11) DEFAULT NULL,
   `id_product` int(11) NOT NULL,
-  `quanity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -98,17 +98,8 @@ INSERT INTO `reviews` (`num`, `id_images`, `name`, `review`) VALUES
 (63, 1, 'sdshsdhdshsdh', 'sdhsdhsdhsdddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
 (67, 1, '1421414', '124124142'),
 (68, 1, 'ASDASFAFASF', 'SAFASFASFAFAFSAFAF'),
-(69, 0, '', ''),
 (70, 1, 'sgdssd', 'sdgsdgsd'),
-(71, 0, '', ''),
-(72, 0, '', ''),
-(73, 0, '', ''),
-(74, 0, '', ''),
-(75, 0, '', ''),
-(76, 0, '', ''),
-(78, 0, '', ''),
-(79, 1, 'safaas', 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftttttttttt'),
-(80, 0, '', '');
+(79, 1, 'safaas', 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftttttttttt');
 
 -- --------------------------------------------------------
 
@@ -121,7 +112,7 @@ CREATE TABLE `users` (
   `name` varchar(50) NOT NULL,
   `login` varchar(30) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `role` int(2) NOT NULL DEFAULT '0' COMMENT '1 - адин, 0 - юзер',
+  `role` int(2) NOT NULL DEFAULT '0' COMMENT '1 - админ, 0 - юзер',
   `dob` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -132,7 +123,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `login`, `password`, `role`, `dob`) VALUES
 (1, 'Вася', 'admin', '21db9c15a75962a0865d5a39fe7fb9ff', 1, '2000-01-25'),
 (2, 'Света', 'svet', 'svet', 0, NULL),
-(35, 'Саня', 'sah', '123', 0, '2004-02-04');
+(35, 'Саня', 'sah', '123', 0, '2004-02-04'),
+(36, 'Инокентий', 'ink', '21db9c15a75962a0865d5a39fe7fb9ff', 0, '2019-02-06'),
+(37, 'Павел', 'pavel', '029e3ddc05d73fb8fcae83ccad0a231b', 0, '2019-02-06'),
+(38, 'sadasd', 'qwe', '21bc9c70f50f4f51b2a52f4b7240ce92', 0, '2019-02-01');
 
 --
 -- Индексы сохранённых таблиц
@@ -170,7 +164,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT для таблицы `images`
@@ -188,7 +182,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

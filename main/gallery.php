@@ -161,9 +161,9 @@ fwrite($file,date('H:i:s d-m-Y') . PHP_EOL);
 if (file_exists($fileLog)) {
 	$file_arr = file($fileLog);
 	if (count($file_arr) >= 10) {
-		for ($i = 1;file_exists("log{$i}.txt");$i++) {}
-		fopen("log{$i}.txt", 'a');
-		copy($fileLog, "log{$i}.txt");
+		for ($i = 1;file_exists("../log/log{$i}.txt");$i++) {}
+		fopen("../log/log{$i}.txt", 'a');
+		copy($fileLog, "../log/log{$i}.txt");
 		file_put_contents($fileLog, '');
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $file = ROOT_DIR . '/' . $_FILES['userfile']['name'];
+    $file = PUBLIC_DIR . '/img/' . $_FILES['userfile']['name'];
     copy($_FILES['userfile']['tmp_name'], $file);
     header('Location: '. $_SERVER['REQUEST_URI']);
     exit;
