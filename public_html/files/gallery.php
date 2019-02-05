@@ -31,9 +31,6 @@ while ($row = mysqli_fetch_assoc($res)) {
 		<a style="float:left" href="?page=8&url={$row['url']}&dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
 		<img src={$dirImg}{$row['url']} 
 			alt={$row['name']} width=200px></img></a>
-		<form action="" method="post">
-				<input type="submit" value="Добавить в корзину">
-		</form>
 		<figcaption>Размер изображения: <br>{$row['size']}<br><br>
 			Добавить отзыв:
 			<form action="" method="post">
