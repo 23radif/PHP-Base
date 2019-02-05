@@ -1,5 +1,4 @@
 <?php
-
 const SOL = "b07152d234b79075b9640";
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if (empty($_POST['login']) || empty($_POST['password'])){
@@ -26,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		exit;
 	}
 	$_SESSION['msg'] = 'Неверные логин или пароль';
+	header('Location: /main/?page=9');
+	exit;
 }
 
 if (! empty($_GET['exit'])){
