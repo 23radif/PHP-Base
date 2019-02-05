@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     exit;
 }
 
-$title = 'Добавление пользователя';
+$title = 'Добавление файлов';
 $content = <<<php
 <p>
 <form enctype="multipart/form-data" method="post">
