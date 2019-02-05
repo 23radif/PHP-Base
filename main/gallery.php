@@ -1,7 +1,6 @@
 <?php
 $link = connect();
-$dirImg = './img/';
-session_start();
+$dirImg = '../public_html/img/';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$name = clearStr($_POST["name"]);
@@ -43,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 $sql = "SELECT id, url, size, name FROM images ORDER BY CountClick DESC ;";
 $res = mysqli_query($link, $sql);
 $content = '<h2>Корзина товаров:</h2>';
-while ($row = mysqli_fetch_assoc($res)) {
+if (!empty($_SESSION['cart'])) {
+	while ($row = mysqli_fetch_assoc($res)) {
 	foreach ($_SESSION['cart'] as $key => $value) {
 		if ($row['id'] == $value) {
 			$content .= <<<php
@@ -60,6 +60,7 @@ $content .= <<<php
 		<input type="submit" name="buy" value="Купить">
 	</form>
 php;
+}
 
 $content .= '<br><br><h2>Товары:</h2>';
 $res = mysqli_query($link, $sql);
@@ -111,7 +112,7 @@ mysqli_close($link);
 //4. *Модернизировать логирование так, чтоб последнии данные всегда логировались в файл log.txt. 
 //Как только в данном файле будет 10 записей, данные из него должны быть перенесены в файл log1.txt. 
 //Если он уже существует - в log2.txt итд.
-$fileLog = 'log.txt';
+$fileLog = '../log/log.txt';
 $file = fopen($fileLog, 'a');
 fwrite($file,date('H:i:s d-m-Y') . PHP_EOL);
 //$str = file_get_contents($fileLog);
