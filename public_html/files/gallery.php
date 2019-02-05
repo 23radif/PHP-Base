@@ -1,5 +1,6 @@
 <?php
 $link = connect();
+$dirImg = './img/';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$name = clearStr($_POST["name"]);
@@ -13,18 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		mysqli_query($link, $sql);
 	}
 	
-    $sql = "INSERT INTO reviews (id_images, name, review) 
+	if (!empty($name) && !empty($review) && !empty($id_images)) {
+		$sql = "INSERT INTO reviews (id_images, name, review) 
 			VALUES ('$id_images', '$name', '$review')";
-	mysqli_query($link, $sql);
+			mysqli_query($link, $sql);
+	}
+	
 	header('Location: '. $_SERVER['REQUEST_URI']);
     exit;
 }
 
 $sql = "SELECT id, url, size, name FROM images ORDER BY CountClick DESC ;";
 $res = mysqli_query($link, $sql);
-
-$dirImg = './img/';
-
 while ($row = mysqli_fetch_assoc($res)) {
 	$content .= <<<php
 	<div style="float:left; margin: 2px; width: 200px; border:1px solid gray; padding:3px">
@@ -35,7 +36,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 			Добавить отзыв:
 			<form action="" method="post">
 				<input type="text" name="name" placeholder="Имя" maxlength="50">
-				<input type="textarea" name="review" placeholder="Отзыв" maxlength="500">
+				<input type="text" name="review" placeholder="Отзыв" maxlength="500">
 				<input type="hidden" name="id_images" value="{$row['id']}">
 				<input type="submit">
 			</form><br>Отзывы:<br><br>
