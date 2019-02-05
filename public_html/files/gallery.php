@@ -27,7 +27,7 @@ $dirImg = './img/';
 
 while ($row = mysqli_fetch_assoc($res)) {
 	$content .= <<<php
-	<div style="float:left; margin: 0 5px; width: 200px">
+	<div style="float:left; margin: 2px; width: 200px; border:1px solid gray; padding:3px">
 		<a style="float:left" href="?page=8&url={$row['url']}&dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
 		<img src={$dirImg}{$row['url']} 
 			alt={$row['name']} width=200px></img></a>
