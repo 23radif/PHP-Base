@@ -34,8 +34,8 @@ while ($row = mysqli_fetch_assoc($res)) {
 		<figcaption>Размер изображения: <br>{$row['size']}<br><br>
 			Добавить отзыв:
 			<form action="" method="post">
-				<input type="text" name="name" placeholder="Имя">
-				<input type="text" name="review" placeholder="Отзыв">
+				<input type="text" name="name" placeholder="Имя" maxlength="50">
+				<input type="textarea" name="review" placeholder="Отзыв" maxlength="500">
 				<input type="hidden" name="id_images" value="{$row['id']}">
 				<input type="submit">
 			</form><br>Отзывы:<br><br>

@@ -54,14 +54,14 @@ while ($row = mysqli_fetch_assoc($res)) {
 		$CountClick++;
 		$id = (int)$row['id'];
 		$content .= <<<php
-		<figcaption>
+		<figcaption style="width: 600px; margin: 0 auto">
 			Название товара: <span style="color:green;font-weight:600">{$row['name']}</span><br>
 			Число просмотров: <span style="color:red;font-weight:600">{$CountClick}</span><br>
 			Описание товара: <span style="color:gray;font-weight:600">{$row['ProductDescription']}</span><br><br>
 			Добавить отзыв:
 			<form action="" method="post">
-				<input type="text" name="name" placeholder="Имя">
-				<input type="text" name="review" placeholder="Отзыв">
+				<input type="text" name="name" placeholder="Имя" maxlength="50">
+				<input type="text" name="review" placeholder="Отзыв" maxlength="500">
 				<input type="hidden" name="id_images" value="{$row['id']}">
 				<input type="submit">
 			</form><br>Отзывы:<br><br>
