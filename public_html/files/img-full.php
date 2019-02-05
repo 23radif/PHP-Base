@@ -15,9 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		mysqli_query($link, $sql);
 	}
 	
-    $sql = "INSERT INTO reviews (id_images, name, review) 
-			VALUES ('$id_images', '$name', '$review')";
-	mysqli_query($link, $sql);
+	if (!empty($name) && !empty($review) && !empty($id_images)) {
+	$sql = "INSERT INTO reviews (id_images, name, review) 
+		VALUES ('$id_images', '$name', '$review')";
+		mysqli_query($link, $sql);
+	}
+
 	header('Location: '. $_SERVER['REQUEST_URI']);
     exit;
 }

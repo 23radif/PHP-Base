@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$remove = clearStr($_POST["remove"]);
 	$removeRev = clearStr($_POST["removeRev"]);
 	$AddToCart = clearStr($_POST["AddToCart"]);
+	$buy = clearStr($_POST["buy"]);
 	
 	if ($remove == 'Удалить') {
 		$sql = "DELETE FROM reviews WHERE reviews.num = {$removeRev}";
@@ -27,31 +28,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$_SESSION['cart'][] = $id_images;
 	}
 	
+	if (!empty($buy)) {
+		foreach ($_SESSION['cart'] as $key => $value) {
+			$sql = "INSERT INTO customers(id_product) 
+			VALUES ($value)";
+			mysqli_query($link, $sql);
+		}
+	}
+	
 	header('Location: '. $_SERVER['REQUEST_URI']);
     exit;
 }
 
-var_dump($_SESSION['cart']);
-//foreach ($_SESSION['cart'] as $key => $value) {
-//	$id_images = $value;
-//}
-
 $sql = "SELECT id, url, size, name FROM images ORDER BY CountClick DESC ;";
 $res = mysqli_query($link, $sql);
-$content = <<<php
-	<h2>Корзина товаров:</h2>
-php;
+$content = '<h2>Корзина товаров:</h2>';
 while ($row = mysqli_fetch_assoc($res)) {
 	foreach ($_SESSION['cart'] as $key => $value) {
 		if ($row['id'] == $value) {
 			$content .= <<<php
-			<a style="" href="?page=8&url={$row['url']}&dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
+			<a style="" &dirImg={$dirImg}&alt={$row['name']}&size={$row['size']}">
 				<img src={$dirImg}{$row['url']} 
 					alt={$row['name']} width=100px></img></a>
 php;
 		}
 	}
 }
+
+$content .= <<<php
+	<form action="" method="post">
+		<input type="submit" name="buy" value="Купить">
+	</form>
+php;
 
 $content .= '<br><br><h2>Товары:</h2>';
 $res = mysqli_query($link, $sql);
