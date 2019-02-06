@@ -1,6 +1,13 @@
 <?php
 $login = $_SESSION['login'];
+$_SESSION['msgPersonalArea'] = 'Необходимо авторизоваться, чтобы попасть в личный кабинет!';
+
+if(!empty($_SESSION['msgPersonalArea'])) {
+	$content .= "<span style='color:red'>{$_SESSION['msgPersonalArea']}</span><br>";
+}
+
 if (!empty($login )) {
+	$_SESSION['msgPersonalArea'] = '';
 	$sql = "SELECT id, name, login, password, role, dob 
 			FROM users 
 			WHERE login = '$login'";

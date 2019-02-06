@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	if ($password != $passwordRep) {
 		$_SESSION['msg_auth'] = 'Ошибка при повторном вводе пароля!';
-		header('Location: /main/?page=11');
+		header('Location: /' . $domainPath . '/?page=11');
 		exit;
 	}
 	
 	if (empty($name) || empty($dob) || empty($login) || empty($password) || empty($passwordRep)) {
 		$_SESSION['msg_auth'] = 'Необходимо заполнить все поля!';
-		header('Location: /main/?page=11');
+		header('Location: /' . $domainPath . '/?page=11');
 		exit;
 	}
 	
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ($row = mysqli_fetch_assoc($res)) {
 		if ($login == $row['login']) {
 			$_SESSION['msg_auth'] = 'Данный логин уже существует! Подберите другой!';
-			header('Location: /main/?page=11');
+			header('Location: /' . $domainPath . '/?page=11');
 			exit;
 		} 
 	}
@@ -37,14 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$_SESSION['msgGallery'] = 'Вы авторизованный пользователь. Можете покупать товары';
 	$_SESSION['msgGalleryErr'] = '';
 	
-	header('Location: /main/?page=10');
+	header('Location: /' . $domainPath . '/?page=10');
 	exit;
 }
 
-if(!empty($_SESSION['msg'])) {
-	$title = 'Регистрация пользователя';
+if(!empty($_SESSION['msg_auth'])) {
 	$content = "<span style='color:red'>{$_SESSION['msg_auth']}</span>";
 }
+$title = 'Регистрация пользователя';
 $content .= <<<php
 <form method="post">
     <input type="text" name="name" placeholder="Введите Ваше имя" style="width:220px;padding: 3px"><br>

@@ -1,5 +1,6 @@
 <?php
 const SOL = "b07152d234b79075b9640";
+$domainPath = 'public_html';
 
 function connect() {
     static $link;
