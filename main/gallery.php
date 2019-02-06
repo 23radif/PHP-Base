@@ -1,6 +1,6 @@
 <?php
 $link = connect();
-$dirImg = '../public_html/img/';
+$dirImg = '../' . $domainPath .'/img/';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$name = clearStr($_POST["name"]);
