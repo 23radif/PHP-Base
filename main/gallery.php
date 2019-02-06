@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			mysqli_query($link, $sql);
 	}
 	
-	if (!empty($AddToCart)) {
+	if (!empty($AddToCart) || !empty($addProduct)) {
 		if (empty($_SESSION['cart'][$id_images])) {
 			$_SESSION['cart'][$id_images]['count'] = 1;
 		} else {
