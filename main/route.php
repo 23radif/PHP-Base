@@ -1,6 +1,7 @@
 <?php
 const ROOT_DIR = __DIR__;
 include('../config/config.php');
+include('../engine/my-functions.php');
 session_start();
 
 $page = (int)$_GET['page'];
