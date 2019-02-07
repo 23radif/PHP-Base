@@ -15,4 +15,3 @@ $content = <<<php
 </form>
 php;
 
-

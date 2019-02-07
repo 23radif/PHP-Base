@@ -19,5 +19,4 @@ if (!empty($login )) {
 	Ваш день рождения: <span style='color:gray;font-weight:600'>{$row['dob']}</span>";
 }
 $title = 'Личный кабинет';
-
 ?>

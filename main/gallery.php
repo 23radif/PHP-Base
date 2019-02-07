@@ -153,22 +153,9 @@ mysqli_close($link);
 //4. *Модернизировать логирование так, чтоб последнии данные всегда логировались в файл log.txt. 
 //Как только в данном файле будет 10 записей, данные из него должны быть перенесены в файл log1.txt. 
 //Если он уже существует - в log2.txt итд.
-$fileLog = '../log/log.txt';
-$file = fopen($fileLog, 'a');
-fwrite($file,date('H:i:s d-m-Y') . PHP_EOL);
-//$str = file_get_contents($fileLog);
+//(Функция находится в папке config, подключено в route)
 
-if (file_exists($fileLog)) {
-	$file_arr = file($fileLog);
-	if (count($file_arr) >= 10) {
-		for ($i = 1;file_exists("../log/log{$i}.txt");$i++) {}
-		fopen("../log/log{$i}.txt", 'a');
-		copy($fileLog, "../log/log{$i}.txt");
-		file_put_contents($fileLog, '');
-	}
-}
 
-fclose($file);
 //ДЗ из 4 урока. Добавление изображений сканированием директории
 /*
 $dirImg = __DIR__ . '/img';

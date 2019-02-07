@@ -47,7 +47,6 @@ $content = <<<php
 </form>
 <p>Результат: {$result}</p>
 php;
-
 ?>
 
 
