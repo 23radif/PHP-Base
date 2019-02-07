@@ -1,11 +1,10 @@
 <?php
-const SOL = "b07152d234b79075b9640";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$name = clearStr($_POST['name']);
 	$dob = clearStr($_POST['dob']);
 	$login = clearStr($_POST['login']);
-	$password = md5(md5($_POST['password'] . SOL));
-	$passwordRep = md5(md5($_POST['passwordRep'] . SOL));
+	$password = passwordGen($_POST['password']);
+	$passwordRep = passwordGen($_POST['passwordRep']);
 	
 	if ($password != $passwordRep) {
 		$_SESSION['msg_auth'] = 'Ошибка при повторном вводе пароля!';

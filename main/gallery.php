@@ -94,12 +94,12 @@ php;
 	}
 }
 
-$content .= <<<php
-	<form action="" method="post">
-		<input type="submit" name="buy" value="Купить выбранные товары">
-	</form>
-	<span style='color:green'>{$_SESSION['msgGallery']}</span>
-	<span style='color:red'>{$_SESSION['msgGalleryErr']}</span>
+	$content .= <<<php
+		<form action="" method="post">
+			<input type="submit" name="buy" value="Купить выбранные товары">
+		</form>
+		<span style='color:green'>{$_SESSION['msgGallery']}</span>
+		<span style='color:red'>{$_SESSION['msgGalleryErr']}</span>
 php;
 }
 

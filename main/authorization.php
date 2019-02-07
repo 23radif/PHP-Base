@@ -1,5 +1,4 @@
 <?php
-const SOL = "b07152d234b79075b9640";
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if (empty($_POST['login']) || empty($_POST['password'])){
 		$_SESSION['msg'] = 'Не все параметры переданы';
@@ -14,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			WHERE login = '$login'";
 	$res = mysqli_query(connect(), $sql);
 	$row = mysqli_fetch_assoc($res);
-	$password = md5(md5($_POST['password'] . SOL));
+	$password = passwordGen($_POST['password']);
 //        $passwordSql = '21db9c15a75962a0865d5a39fe7fb9ff';
 	$passwordSql = $row['password'];
 	if ($password == $passwordSql){

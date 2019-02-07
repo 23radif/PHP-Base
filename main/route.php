@@ -77,6 +77,5 @@ switch ($page){
     </ul>
     <h1><?= $title?></h1>
     <div><?= $content?></div>
-
 </body>
 </html>
