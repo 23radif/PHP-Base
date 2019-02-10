@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	$sql = "SELECT login FROM users";
 	$res = mysqli_query(connect(), $sql);
-	if ($row = mysqli_fetch_assoc($res)) {
+	while ($row = mysqli_fetch_assoc($res)) {
 		if ($login == $row['login']) {
 			$_SESSION['msg_auth'] = 'Данный логин уже существует! Подберите другой!';
 			header('Location: /' . $domainPath . '/?page=11');

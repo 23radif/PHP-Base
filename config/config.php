@@ -1,6 +1,10 @@
 <?php
-const SOL = "b07152d234b79075b9640";
 $domainPath = 'public_html';
+const SOL = "b07152d234b79075b9640";
+
+function passwordGen($pass) {
+	return md5(md5($pass . SOL));
+}
 
 function connect() {
     static $link;
@@ -14,13 +18,3 @@ function clearStr($str) {
     return mysqli_real_escape_string(connect(), strip_tags(trim($str)));
 }
 
-function isAdmin(){
-    return $_SESSION['isAdmin'] == 'YES';
-}
-
-function getMsg(){
-    if (! empty($_SESSION['msg'])){
-        echo  $_SESSION['msg'];
-        $_SESSION['msg'] = '';
-    }
-}

@@ -18,8 +18,3 @@ function fileLog ($pagePath = '') {
 
 	fclose($file);
 }
-
-const SOL = "b07152d234b79075b9640";
-function passwordGen($pass) {
-	return md5(md5($pass . SOL));
-}
