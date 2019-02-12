@@ -7,7 +7,7 @@ function index () {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $login = clearStr($_POST['login']);
         $name = clearStr($_POST['name']);
-        $password = clearStr($_POST['password']);
+        $password = $_POST['password'];
         $dob = clearStr($_POST['dob']);
         $typeUser = clearStr($_POST['typeUser']);
         $sql = "UPDATE users SET 

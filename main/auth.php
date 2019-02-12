@@ -37,8 +37,7 @@ function auth(){
                 WHERE login = '$login'";
         $res = mysqli_query(connect(), $sql);
         $row = mysqli_fetch_assoc($res);
-        $password = md5(md5($_POST['password'] . SOL));
-//        $passwordSql = '21db9c15a75962a0865d5a39fe7fb9ff';
+        $password = passwordGen($_POST['password']);
         $passwordSql = $row['password'];
         if ($password == $passwordSql){
             if ($row['typeUser'] == '1') {
