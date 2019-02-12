@@ -2,10 +2,10 @@
 function index()
 {
     if (empty($_SESSION['goods'])) {
-        return 'Пуста';
+        return 'Корзина пуста';
     }
     $content = '<h1>Корзина товаров</h1>';
-    $dirImg = '../public_html/img/';
+    $dirImg = 'img/';
     $sumPrice = 0;
     foreach ($_SESSION['goods'] as $id => $good) {
         $content .= <<<php
@@ -63,9 +63,7 @@ function add() {
             $msg = '';
         }
     }
-    if ($_SERVER['HTTP_REFERER'] == 'http://public/?page=backet') {
-        $msg = '';
-    }
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo count ($_SESSION['goods']);
         exit;

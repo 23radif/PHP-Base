@@ -1,7 +1,7 @@
 <?
 function index()
 {
-    $dirImg = '../public_html/img/';
+    $dirImg = 'img/';
     $sql = "SELECT id, name, info, price, url FROM goods ORDER BY CountClick DESC ";
     $res = mysqli_query(connect(), $sql);
     $content = '<h2>Товары сортируются по популярности:</h2>';
@@ -16,6 +16,11 @@ php;
     }
     fileLog('-goods');
     $_SESSION['title'] = 'Товары';
+//    $timeNow = time();
+//    $stock = $timeNow + (30 * 24 * 60 * 60);
+//    if (($stock - time()) < 0) {
+//        return $stock - time();
+//    }
     return $content;
 }
 
@@ -42,7 +47,7 @@ function one(){
         exit;
     }
 
-    $dirImg = '../public_html/img/';
+    $dirImg = 'img/';
     $id = (int)$_GET['id'];
     $sql = "SELECT id, name, info, price, url, CountClick FROM goods WHERE id = $id";
     $res = mysqli_query(connect(), $sql);

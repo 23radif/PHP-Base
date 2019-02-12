@@ -17,3 +17,4 @@ function fileLog ($pagePath = '') {
 
 	fclose($file);
 }
+
